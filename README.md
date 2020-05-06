@@ -1,4 +1,6 @@
 # LibraryManagementSystem
+this project use java core
+
   * Users of the System
      * Admin
      * Libraian
