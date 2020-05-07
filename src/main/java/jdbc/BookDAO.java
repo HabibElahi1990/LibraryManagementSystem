@@ -28,7 +28,7 @@ public class BookDAO extends BaseDAO{
 
     public void insertBook(Book book) throws ConnectionException {
 
-        String query = "insert into Book(id,name,bookStatus,userId) values (?,?,?,?,?)";
+        String query = "insert into Book(id,name,bookStatus,userId) values (?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, getId(Book.class));

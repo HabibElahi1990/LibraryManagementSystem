@@ -16,7 +16,7 @@ public class UserDAO extends BaseDAO {
         this.connection = connection;
     }
 
-    public void createUser() throws ConnectionException {
+    public void createUserTable() throws ConnectionException {
         String query = "create table user (" +
                 "id  number(10),\n" +
                 "name  varchar(512 char),\n" +
@@ -65,14 +65,17 @@ public class UserDAO extends BaseDAO {
         return user;
     }
 
-    public User findUser(String userName,String pass) throws ConnectionException {
-        User user = new User();
-        String q = "select * from user u where u.id=?";
+    public User findUser(String userName,String pass,Integer userType) throws ConnectionException {
+        User user = null;
+        String q = "select * from user u where u.userName=? and u.password=? and u.userType=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(q);
-//            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1,userName);
+            preparedStatement.setString(2,pass);
+            preparedStatement.setInt(3,userType);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                user=new User();
                 user.setId(resultSet.getInt(1));
                 user.setName(resultSet.getString(2));
                 user.setUserName(resultSet.getString(3));
